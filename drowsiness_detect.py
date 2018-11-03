@@ -2,7 +2,7 @@ from scipy.spatial import distance
 from imutils import face_utils
 from threading import Thread
 import numpy as np
-#Insert sound library functions here
+import playsound
 import imutils
 import time
 import dlib
@@ -15,6 +15,10 @@ def eye_aspect_ratio(eye):
 
     ear = (A+B) / (2*C)
     return ear
+
+def sound_alarm(path = 'audio/alert.wav'):
+	# play an alarm sound
+	playsound.playsound(path)
 
 EYE_ASPECT_RATIO_THRESHOLD = 0.3
 EYE_ASPECT_RATIO_CONSEC_FRAMES = 50
@@ -56,6 +60,9 @@ while(True):
         if(eyeAspectRatio < EYE_ASPECT_RATIO_THRESHOLD):
             COUNTER += 1
             if COUNTER >= EYE_ASPECT_RATIO_CONSEC_FRAMES:
+                sound_thread = Thread(target = sound_alarm)
+                sound_thread.deamon = True
+                sound_thread.start()
                 cv2.putText(frame, "You are Drowsy", (10,30), cv2.FONT_HERSHEY_SIMPLEX, 0.7, (0,0,255), 2)
         else:
             COUNTER = 0
