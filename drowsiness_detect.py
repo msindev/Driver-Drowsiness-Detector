@@ -1,12 +1,14 @@
 from scipy.spatial import distance
 from imutils import face_utils
-from threading import Thread
 import numpy as np
-import playsound
+import pygame
 import imutils
 import time
 import dlib
 import cv2
+
+pygame.mixer.init()
+pygame.mixer.music.load('audio/alert.wav')
 
 def eye_aspect_ratio(eye):
     A = distance.euclidean(eye[1], eye[5])
@@ -16,9 +18,6 @@ def eye_aspect_ratio(eye):
     ear = (A+B) / (2*C)
     return ear
 
-def sound_alarm(path = 'audio/alert.wav'):
-	# play an alarm sound
-	playsound.playsound(path)
 
 EYE_ASPECT_RATIO_THRESHOLD = 0.3
 EYE_ASPECT_RATIO_CONSEC_FRAMES = 50
@@ -60,11 +59,10 @@ while(True):
         if(eyeAspectRatio < EYE_ASPECT_RATIO_THRESHOLD):
             COUNTER += 1
             if COUNTER >= EYE_ASPECT_RATIO_CONSEC_FRAMES:
-                sound_thread = Thread(target = sound_alarm)
-                sound_thread.deamon = True
-                sound_thread.start()
+                pygame.mixer.music.play(-1)
                 cv2.putText(frame, "You are Drowsy", (10,30), cv2.FONT_HERSHEY_SIMPLEX, 0.7, (0,0,255), 2)
         else:
+            pygame.mixer.music.stop()
             COUNTER = 0
 
     cv2.imshow('Video', frame)
@@ -73,4 +71,4 @@ while(True):
 
 #Finally when video capture is over, release the video capture and destroyAllWindows
 video_capture.release()
-cv.destroyAllWindows()
+cv2.destroyAllWindows()
