@@ -16,7 +16,13 @@ The program contains 3 files, which are
 ![Drowsiness Detection Demo](https://github.com/mohitwildbeast/Driver-Drowsiness-Detector/blob/master/images/drowsiness_detector_demo.gif)
  
  ## Requirements
-  
+> 
+> IMPORTANT
+
+  Download `shape_predictor_68_face_landmarks.dat.bz2` from [Shape Predictor 68 features](http://dlib.net/files/shape_predictor_68_face_landmarks.dat.bz2) 
+  Extract the file in the project folder using 
+  ``bzip2 -dk shape_predictor_68_face_landmarks.dat.bz2``
+
 
     numpy==1.15.2
 	dlib==19.16.0
