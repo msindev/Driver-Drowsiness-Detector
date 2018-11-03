@@ -10,6 +10,8 @@ import cv2
 pygame.mixer.init()
 pygame.mixer.music.load('audio/alert.wav')
 
+face_cascade = cv2.CascadeClassifier("haarcascades/haarcascade_frontalface_default.xml")
+
 def eye_aspect_ratio(eye):
     A = distance.euclidean(eye[1], eye[5])
     B = distance.euclidean(eye[2], eye[4])
@@ -40,7 +42,14 @@ while(True):
     gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
 
     faces = detector(gray, 0)
+
+    face_rectangle = face_cascade.detectMultiScale(gray, 1.3, 5)
+
+    for (x,y,w,h) in face_rectangle:
+        cv2.rectangle(frame,(x,y),(x+w,y+h),(255,0,0),2)
+
     for face in faces:
+
         shape = predictor(gray, face)
         shape = face_utils.shape_to_np(shape)
 
