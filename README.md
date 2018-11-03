@@ -6,6 +6,7 @@ The program contains 3 files, which are
  Demo-
  
 |  ![Test Image](https://github.com/mohitwildbeast/Driver-Drowsiness-Detector/blob/master/images/test.jpeg)| ![Result Image](https://github.com/mohitwildbeast/Driver-Drowsiness-Detector/blob/master/images/result_face_detector_single_image.png) |
+|---|---|
 
  - **face_and_eye_detector_webcam_video.py** - Detects face and eye in a webcam feed ![Webcam Face and Eye Detection](https://github.com/mohitwildbeast/Driver-Drowsiness-Detector/blob/master/images/webcam_face_eye_detect.jpeg)
  - **drowsiness_detect.py**- This script detects if person is drowsy or not using webcam video feed
