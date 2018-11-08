@@ -47,3 +47,5 @@ Run script using:
 Run script using:
 
     python drowsiness_detect.py
+
+The algorithm for Eye Aspect Ratio was taken from pyimagesearch.com blog, by Adrian RoseBrock.
